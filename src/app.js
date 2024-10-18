@@ -9,7 +9,7 @@ const app = express();
 
 connectDB();
 
-app.use(cors());  // Enable CORS for all routes
+app.use(cors({ origin: "*" }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
