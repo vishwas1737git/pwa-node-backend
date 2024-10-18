@@ -1,0 +1,25 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <h1>User List</h1>
+    <ul>
+      <% users.forEach(user => { %>
+        <li><%= user.name %> (<%= user.email %>) - Age: <%= user.age %></li>
+      <% }) %>
+    </ul>
+
+    <h2>Add New User</h2>
+    <form action="/add" method="POST">
+        <label>Name: <input type="text" name="name" required></label><br>
+        <label>Email: <input type="email" name="email" required></label><br>
+        <label>Age: <input type="number" name="age" required></label><br>
+        <button type="submit">Add User</button>
+    </form>
+</body>
+</html>
