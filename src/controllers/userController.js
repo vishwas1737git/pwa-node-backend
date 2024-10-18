@@ -92,14 +92,12 @@ exports.SignIn = async (req, res) => {
       });
     }
 
-    // If the password is valid, generate a JWT token
     const token = jwt.sign(
       { userId: user._id, email: user.email },
       JWT_SECRET,
-      { expiresIn: "1h" } // Token expires in 1 hour
+      { expiresIn: "1h" }
     );
 
-    // Return the token and success message
     return res.status(200).json({
       status: true,
       message: "User signed in successfully",
@@ -117,11 +115,9 @@ exports.SignIn = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
   try {
-    // Get the authenticated user's ID from the JWT
     const userId = req.user.userId;
 
-    // Find the user by ID
-    const user = await User.findById(userId).select("-password"); // Exclude the password field
+    const user = await User.findById(userId).select("-password");
 
     if (!user) {
       return res.status(404).json({
@@ -129,7 +125,6 @@ exports.getProfile = async (req, res) => {
         message: "User not found.",
       });
     }
-
     return res.status(200).json({
       status: true,
       message: "User profile fetched successfully.",
@@ -158,7 +153,6 @@ exports.updateProfile = async (req, res) => {
       });
     }
 
-    // Update fields if provided
     if (bio) user.bio = bio;
     if (location) user.location = location;
     if (emailContact) user.emailContact = emailContact;
